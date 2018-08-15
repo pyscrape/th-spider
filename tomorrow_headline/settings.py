@@ -64,9 +64,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'tomorrow_headline.pipelines.TomorrowHeadlinePipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'tomorrow_headline.pipelines.TomorrowHeadlinePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +88,10 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# Add mysql settings
+MYSQL_HOST = '127.0.0.1'
+MYSQL_PORT = 32769
+MYSQL_DB = 'scrapy'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = 'my-secret-pw'
