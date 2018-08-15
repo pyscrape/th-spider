@@ -8,9 +8,10 @@
 import scrapy
 
 
-class CnetItem(scrapy.Item):
+class ArticleItem(scrapy.Item):
     title = scrapy.Field()
     author = scrapy.Field()
     url = scrapy.Field()
+    src = scrapy.Field()
     summary = scrapy.Field()
     content = scrapy.Field()

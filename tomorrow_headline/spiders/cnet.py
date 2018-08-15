@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from .. import items
+from ..items import ArticleItem
 
 
 class CnetSpider(scrapy.Spider):
@@ -24,18 +24,14 @@ class CnetSpider(scrapy.Spider):
 
     def parse_article(self, response):
         article_head_tag = response.xpath('//div[@class="col-10 articleHead"]')
-        news = items.CnetItem()
+        news = ArticleItem()
         news['title'] = article_head_tag.xpath('h1/text()').extract_first()
         news['summary'] = article_head_tag.xpath('p/text()').extract_first()
         news['author'] = article_head_tag.xpath(
             '//a[@rel="author"]/span/text()').extract_first()
+        news['content'] = response.xpath(
+            '//div[@class="col-7 article-main-body row"]').extract_first()
+        news['url'] = response.url
+        news['src'] = 'cnet.com'
 
-        content = []
-        content_tag = response.xpath(
-            '//div[@class="col-7 article-main-body row"]/node()')
-        for tag in content_tag:
-            name = tag.xpath('name()').extract_first()
-            if name == 'p':
-                content.append(tag.extract())
-        news['content'] = content
         yield news
