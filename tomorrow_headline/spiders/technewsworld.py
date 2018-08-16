@@ -1,5 +1,5 @@
 import scrapy
-
+from ..items import ArticleItem
 
 class technewsworld(scrapy.Spider):
     name = 'technewsworld'
@@ -12,12 +12,12 @@ class technewsworld(scrapy.Spider):
         for href in response.xpath(
                 '//div[@class = "title"]/a/@href').extract():
             yield response.follow(href, self.parse_detail)
-        '''# follow pagination links
+        # follow pagination links
         for href in response.xpath('//div[@id = "earlier"]/a/@href').extract():
-            yield response.follow(href, self.parse)'''
+            yield response.follow(href, self.parse)
 
     def parse_detail(self, response):
-        news = Item.ArticleItem()
+        news = ArticleItem()
         news['title'] = response.xpath('//h1[@class = "title"]/text()').extract_first()
         author = response.xpath('//div[@id = "story-byline"]/text()').extract()[1]
         news['author'] = author[3: ]

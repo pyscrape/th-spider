@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from .. import items
+from ..items import ArticleItem
 
 class livescienceSpider(scrapy.Spider):
     name = "livescience"
@@ -18,7 +18,7 @@ class livescienceSpider(scrapy.Spider):
             yield response.follow(href, self.parse)
 
     def parse_detail(self, response):
-        news = Item.ArticleItem()
+        news = ArticleItem()
         news['title'] = response.xpath('//h1/text()').extract_first()
         news['author'] = response.xpath('//span[@class = "author"]/text()').extract_first()
         news['image'] = response.xpath(

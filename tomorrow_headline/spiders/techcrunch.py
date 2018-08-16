@@ -1,5 +1,5 @@
 import scrapy
-
+from ..items import ArticleItem
 
 class technewsworld(scrapy.Spider):
     name = 'techcrunch'
@@ -17,7 +17,7 @@ class technewsworld(scrapy.Spider):
             yield response.follow(href, self.parse)
 
     def parse_detail(self, response):
-        news = Item.ArticleItem()
+        news = ArticleItem()
         news['title'] = response.xpath('//div[@class = "article__title-wrapper"]/h1/text()').extract_first()
         news['author'] = response.xpath('//div[@class = "article_byline"]/a/text()').extract_first()
         news['image'] = response.xpath(
