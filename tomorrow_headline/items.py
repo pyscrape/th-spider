@@ -13,5 +13,6 @@ class ArticleItem(scrapy.Item):
     author = scrapy.Field()
     url = scrapy.Field()
     src = scrapy.Field()
+    image = scrapy.Field()
     summary = scrapy.Field()
     content = scrapy.Field()
